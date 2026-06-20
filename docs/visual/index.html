@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Umbra - Visual Brief</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #18211d;
+        --muted: #5e6b63;
+        --paper: #f7f5ed;
+        --white: #ffffff;
+        --line: #d8d2c2;
+        --line-strong: #1f2a24;
+        --green: #3e6d57;
+        --blue: #243f73;
+        --gold: #d7a72f;
+        --red: #9b3528;
+        --teal: #2f8076;
+        --shadow: rgba(24, 33, 29, 0.12);
+      }
+
+      * { box-sizing: border-box; }
+
+      html { background: var(--paper); }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+          BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 16px;
+        line-height: 1.55;
+        background:
+          linear-gradient(90deg, rgba(24,33,29,0.045) 1px, transparent 1px),
+          linear-gradient(rgba(24,33,29,0.045) 1px, transparent 1px),
+          var(--paper);
+        background-size: 32px 32px;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: var(--blue);
+        text-decoration-thickness: 0.08em;
+        text-underline-offset: 0.2em;
+      }
+
+      code {
+        font-family: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+        font-size: 0.9em;
+      }
+
+      .shell {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .masthead {
+        min-height: 64px;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 18px;
+        border-bottom: 1px solid var(--line-strong);
+        font-family: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+      }
+
+      .brand-mark {
+        width: 18px;
+        height: 18px;
+        border: 2px solid var(--ink);
+        background:
+          linear-gradient(90deg, var(--gold) 0 50%, var(--ink) 50% 100%);
+      }
+
+      .masthead-center {
+        color: var(--muted);
+        text-align: center;
+      }
+
+      .masthead-right {
+        color: var(--muted);
+        text-align: right;
+      }
+
+      .hero {
+        min-height: 620px;
+        display: grid;
+        grid-template-columns: 1.04fr 0.96fr;
+        gap: 54px;
+        align-items: center;
+        padding: 58px 0 46px;
+        border-bottom: 1px solid var(--line-strong);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 34px;
+        margin: 0 0 22px;
+        padding: 0 12px;
+        border: 1px solid var(--ink);
+        background: var(--white);
+        font-family: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+        font-size: 0.74rem;
+        text-transform: uppercase;
+        letter-spacing: 0;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 9px;
+        height: 9px;
+        background: var(--red);
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 9ch;
+        font-family: "Iowan Old Style", "Hoefler Text", Georgia, serif;
+        font-size: 6.75rem;
+        line-height: 0.9;
+        font-weight: 650;
+      }
+
+      .hero-copy {
+        max-width: 610px;
+        margin: 24px 0 0;
+        font-size: 1.18rem;
+        color: #27322d;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0;
+        margin: 32px 0 0;
+        border: 1px solid var(--line-strong);
+        background: var(--white);
+      }
+
+      .metric {
+        min-height: 112px;
+        padding: 18px;
+        border-right: 1px solid var(--line);
+      }
+
+      .metric:last-child { border-right: 0; }
+
+      .metric span {
+        display: block;
+        margin-bottom: 10px;
+        font-family: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+        font-size: 0.72rem;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 1.05rem;
+        line-height: 1.25;
+      }
+
+      .hero-visual {
+        background: var(--white);
+        border: 1px solid var(--line-strong);
+        box-shadow: 14px 14px 0 var(--gold);
+      }
+
+      .hero-visual img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid var(--line-strong);
+      }
+
+      .caption {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 16px;
+        font-family: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+        font-size: 0.72rem;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+
+      section {
+        padding: 66px 0;
+        border-bottom: 1px solid var(--line-strong);
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: 148px minmax(0, 1fr);
+        gap: 28px;
+        margin-bottom: 34px;
+      }
+
+      .section-label {
+        padding-top: 12px;
+        border-top: 4px solid var(--red);
+        color: var(--red);
+        font-family: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+        font-size: 0.76rem;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        margin: 0;
+        max-width: 18ch;
+        font-family: "Iowan Old Style", "Hoefler Text", Georgia, serif;
+        font-size: 3.1rem;
+        line-height: 1;
+        font-weight: 650;
+      }
+
+      .section-kicker {
+        max-width: 62ch;
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 1.04rem;
+      }
+
+      .panel-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        border-top: 1px solid var(--line);
+        border-left: 1px solid var(--line);
+        background: var(--white);
+      }
+
+      .panel {
+        min-height: 212px;
+        padding: 24px;
+        border-right: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 26px;
+        margin-bottom: 18px;
+        padding: 0 8px;
+        border: 1px solid var(--line-strong);
+        font-family: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0;
+      }
+
+      .tag.green { background: #dce9df; color: var(--green); }
+      .tag.blue { background: #dde5f2; color: var(--blue); }
+      .tag.gold { background: #f4e5b5; color: #6f4c00; }
+      .tag.red { background: #f0d5d0; color: var(--red); }
+      .tag.teal { background: #d7ece8; color: var(--teal); }
+
+      h3 {
+        margin: 0 0 8px;
+        font-family: "Iowan Old Style", "Hoefler Text", Georgia, serif;
+        font-size: 1.35rem;
+        line-height: 1.12;
+      }
+
+      .panel p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .workflow {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 28px;
+        align-items: start;
+      }
+
+      .steps {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border-top: 1px solid var(--line);
+      }
+
+      .steps li {
+        display: grid;
+        grid-template-columns: 54px 1fr;
+        gap: 18px;
+        padding: 20px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .num {
+        color: var(--red);
+        font-family: "Iowan Old Style", "Hoefler Text", Georgia, serif;
+        font-size: 2.35rem;
+        line-height: 1;
+      }
+
+      .steps p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .terminal {
+        overflow: hidden;
+        border: 1px solid var(--line-strong);
+        background: #111915;
+        box-shadow: 10px 10px 0 var(--green);
+      }
+
+      .terminal-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 40px;
+        padding: 0 14px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        background: #1b2822;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+
+      .dot.red { background: #e06f64; }
+      .dot.gold { background: #dbbd58; }
+      .dot.green { background: #78bd8c; }
+
+      .terminal-title {
+        margin-left: 8px;
+        color: rgba(255,255,255,0.62);
+        font-family: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+      }
+
+      pre {
+        margin: 0;
+        padding: 22px;
+        overflow-x: auto;
+        color: #eff5ed;
+        font-family: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+        font-size: 0.88rem;
+        line-height: 1.7;
+      }
+
+      .c { color: #91a99e; }
+      .k { color: #f0d26a; }
+      .p { color: #b8cec4; }
+      .s { color: #e5a07e; }
+
+      .manifest {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: 28px;
+      }
+
+      .ledger {
+        border: 1px solid var(--line-strong);
+        background: var(--white);
+      }
+
+      .ledger-row {
+        display: grid;
+        grid-template-columns: 130px 1fr 110px;
+        gap: 16px;
+        align-items: center;
+        min-height: 58px;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .ledger-row:last-child { border-bottom: 0; }
+
+      .ledger-row.header {
+        min-height: 46px;
+        background: var(--ink);
+        color: var(--paper);
+        font-family: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 26px;
+        padding: 0 8px;
+        border: 1px solid var(--line-strong);
+        font-family: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+      }
+
+      .status.done { background: #dce9df; color: var(--green); }
+      .status.wait { background: #f4e5b5; color: #6f4c00; }
+      .status.fail { background: #f0d5d0; color: var(--red); }
+
+      .callout {
+        border: 1px solid var(--line-strong);
+        background: var(--white);
+        box-shadow: 10px 10px 0 var(--blue);
+        padding: 26px;
+      }
+
+      .callout p {
+        margin: 0 0 14px;
+        color: var(--muted);
+      }
+
+      .callout p:last-child { margin-bottom: 0; }
+
+      .split {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 28px;
+      }
+
+      .rule-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border-top: 1px solid var(--line);
+        background: var(--white);
+      }
+
+      .rule-list li {
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        gap: 12px;
+        padding: 15px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .bullet {
+        width: 14px;
+        height: 14px;
+        margin-top: 6px;
+        background: var(--teal);
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 30px 0 54px;
+        color: var(--muted);
+        font-family: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+      }
+
+      @media (max-width: 940px) {
+        .hero,
+        .workflow,
+        .manifest,
+        .split {
+          grid-template-columns: 1fr;
+        }
+
+        h1 { font-size: 4.7rem; }
+        h2 { font-size: 2.45rem; }
+
+        .panel-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-visual {
+          box-shadow: 8px 8px 0 var(--gold);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .shell { width: min(100% - 28px, 1180px); }
+
+        .masthead {
+          grid-template-columns: 1fr;
+          gap: 4px;
+          padding: 14px 0;
+        }
+
+        .masthead-center,
+        .masthead-right {
+          text-align: left;
+        }
+
+        .hero {
+          min-height: auto;
+          padding: 38px 0;
+        }
+
+        h1 { font-size: 3.7rem; }
+        h2 { font-size: 2.05rem; }
+
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .metric {
+          min-height: 88px;
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .metric:last-child { border-bottom: 0; }
+
+        .section-head {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .ledger-row {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+
+        footer {
+          display: block;
+        }
+
+        footer p + p { margin-top: 8px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="masthead">
+        <div class="brand"><span class="brand-mark" aria-hidden="true"></span> Umbra</div>
+        <div class="masthead-center">Virginia SCC CIS · Fresh LLC detection</div>
+        <div class="masthead-right">Visual brief · 2026</div>
+      </header>
+
+      <section class="hero" aria-labelledby="title">
+        <div>
+          <p class="eyebrow">CIS-first public-records workflow</p>
+          <h1 id="title">Warn first.</h1>
+          <p class="hero-copy">
+            Umbra is a local Python CLI for finding newly formed active Virginia
+            LLCs from SCC CIS before deceptive solicitation mailers reach the
+            owners. It favors reliable, auditable collection over noisy scraping.
+          </p>
+          <div class="hero-grid" aria-label="Umbra operating model">
+            <div class="metric">
+              <span>Fresh source</span>
+              <strong>Virginia SCC CIS, queried directly</strong>
+            </div>
+            <div class="metric">
+              <span>Browser lane</span>
+              <strong>Headed Google Chrome, one session</strong>
+            </div>
+            <div class="metric">
+              <span>Scale strategy</span>
+              <strong>Sequential chunks with resumable state</strong>
+            </div>
+          </div>
+        </div>
+
+        <figure class="hero-visual">
+          <img
+            src="ai-generated-images/umbra-pipeline-diagram.png"
+            alt="Umbra pipeline diagram showing headed Chrome, CIS search, CSV export, normalization, and output."
+            width="1448"
+            height="1086"
+          >
+          <figcaption class="caption">
+            <span>CIS to normalized CSV</span>
+            <span>Headed Chrome required</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="mission">
+        <div class="section-head">
+          <div class="section-label">01 · Mission</div>
+          <div>
+            <h2 id="mission">The window is measured in days.</h2>
+            <p class="section-kicker">
+              Solicitation companies monitor public formation records and send
+              official-looking letters quickly. Umbra makes the same public
+              records workflow repeatable for legitimate warning efforts.
+            </p>
+          </div>
+        </div>
+
+        <div class="panel-grid">
+          <article class="panel">
+            <span class="tag red">Problem</span>
+            <h3>New owners are targeted fast</h3>
+            <p>
+              Newly formed LLCs can receive mailers that look government-adjacent
+              and charge for unnecessary or low-cost services.
+            </p>
+          </article>
+          <article class="panel">
+            <span class="tag blue">Source</span>
+            <h3>CIS is the operating source</h3>
+            <p>
+              Umbra uses CIS directly for fresh LLC detection and keeps the
+              browser workflow narrow, observable, and repeatable.
+            </p>
+          </article>
+          <article class="panel">
+            <span class="tag green">Output</span>
+            <h3>Clean rows for outreach</h3>
+            <p>
+              Results are normalized, deduped by Entity ID, and exported as CSV
+              for review, filtering, and owner-warning workflows.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="workflow">
+        <div class="section-head">
+          <div class="section-label">02 · Workflow</div>
+          <div>
+            <h2 id="workflow">Careful automation, not a crawler.</h2>
+            <p class="section-kicker">
+              The runner opens one headed Chrome session, searches CIS
+              sequentially, exports the built-in CSV, and keeps a manifest so
+              long runs can recover instead of starting over.
+            </p>
+          </div>
+        </div>
+
+        <div class="workflow">
+          <ol class="steps">
+            <li>
+              <span class="num">01</span>
+              <div>
+                <h3>Plan the date range</h3>
+                <p>Use <code>query</code> for small windows or <code>batch</code> for monthly or weekly chunks.</p>
+              </div>
+            </li>
+            <li>
+              <span class="num">02</span>
+              <div>
+                <h3>Run one Chrome lane</h3>
+                <p>Umbra reuses a headed Chrome session and returns to the search page between chunks.</p>
+              </div>
+            </li>
+            <li>
+              <span class="num">03</span>
+              <div>
+                <h3>Persist chunk state</h3>
+                <p>Each chunk writes a CSV and manifest state under <code>data/runs/&lt;run-id&gt;/</code>.</p>
+              </div>
+            </li>
+            <li>
+              <span class="num">04</span>
+              <div>
+                <h3>Merge succeeded chunks</h3>
+                <p>The final output keeps one row per Entity ID and prefers Legal Name records.</p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="terminal" aria-label="Example resumable Umbra commands">
+            <div class="terminal-bar" aria-hidden="true">
+              <span class="dot red"></span>
+              <span class="dot gold"></span>
+              <span class="dot green"></span>
+              <span class="terminal-title">umbra</span>
+            </div>
+<pre><code><span class="c"># preview chunks without Chrome</span>
+<span class="k">uv</span> run umbra batch <span class="p">--from</span> <span class="s">01-01-2025</span> <span class="p">--to</span> <span class="s">12-31-2025</span> <span class="p">--dry-run</span>
+
+<span class="c"># run the conservative batch lane</span>
+<span class="k">uv</span> run umbra <span class="p">--csv</span> <span class="p">--output</span> year.csv batch \
+  <span class="p">--from</span> <span class="s">01-01-2025</span> <span class="p">--to</span> <span class="s">12-31-2025</span>
+
+<span class="c"># resume without refetching succeeded chunks</span>
+<span class="k">uv</span> run umbra <span class="p">--csv</span> <span class="p">--output</span> year.csv batch \
+  <span class="p">--from</span> <span class="s">01-01-2025</span> <span class="p">--to</span> <span class="s">12-31-2025</span> <span class="p">--resume</span>
+
+<span class="c"># inspect state without opening Chrome</span>
+<span class="k">uv</span> run umbra batch <span class="p">--run</span> data/runs/&lt;run-id&gt; <span class="p">--status</span></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="manifest">
+        <div class="section-head">
+          <div class="section-label">03 · Resilience</div>
+          <div>
+            <h2 id="manifest">The manifest is the recovery point.</h2>
+            <p class="section-kicker">
+              Instead of holding a long run in memory, Umbra writes the state of
+              every chunk. A failure on chunk nine no longer destroys chunks one
+              through eight.
+            </p>
+          </div>
+        </div>
+
+        <div class="manifest">
+          <div class="ledger" role="table" aria-label="Example batch manifest states">
+            <div class="ledger-row header" role="row">
+              <div role="columnheader">Chunk</div>
+              <div role="columnheader">Range</div>
+              <div role="columnheader">State</div>
+            </div>
+            <div class="ledger-row" role="row">
+              <div role="cell">2026-05-31</div>
+              <div role="cell">05-31-2026 to 05-31-2026</div>
+              <div role="cell"><span class="status done">succeeded</span></div>
+            </div>
+            <div class="ledger-row" role="row">
+              <div role="cell">2026-06-01</div>
+              <div role="cell">06-01-2026 to 06-01-2026</div>
+              <div role="cell"><span class="status done">succeeded</span></div>
+            </div>
+            <div class="ledger-row" role="row">
+              <div role="cell">2026-06-02</div>
+              <div role="cell">06-02-2026 to 06-02-2026</div>
+              <div role="cell"><span class="status wait">pending</span></div>
+            </div>
+          </div>
+
+          <aside class="callout">
+            <h3>What gets saved</h3>
+            <p>
+              <code>manifest.json</code> records chunk IDs, dates, state, attempt count,
+              row counts, unique Entity IDs, CSV paths, hashes, timestamps, and
+              failure class details.
+            </p>
+            <p>
+              Chunk CSVs live beside the manifest, so <code>--resume</code> can skip
+              already-succeeded chunks and rebuild the final merged CSV quickly.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section aria-labelledby="boundaries">
+        <div class="section-head">
+          <div class="section-label">04 · Boundaries</div>
+          <div>
+            <h2 id="boundaries">Scale by reliability first.</h2>
+            <p class="section-kicker">
+              Umbra does not try to overpower CIS bot detection. It keeps the
+              browser lane narrow, records what happened, and makes retries
+              explicit.
+            </p>
+          </div>
+        </div>
+
+        <div class="split">
+          <div>
+            <h3>Supported posture</h3>
+            <ul class="rule-list">
+              <li><span class="bullet"></span><span>Headed Google Chrome through Playwright.</span></li>
+              <li><span class="bullet"></span><span>Sequential CIS searches with one active worker.</span></li>
+              <li><span class="bullet"></span><span>Active Limited Liability Company rows only for formation-date queries.</span></li>
+              <li><span class="bullet"></span><span>CSV normalization and Entity ID dedupe before output.</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Intentionally avoided</h3>
+            <ul class="rule-list">
+              <li><span class="bullet"></span><span>Headless production scraping.</span></li>
+              <li><span class="bullet"></span><span>Parallel browser fleets against CIS.</span></li>
+              <li><span class="bullet"></span><span>Persistent Chrome profiles after they worsened rejections.</span></li>
+              <li><span class="bullet"></span><span>Alternative bulk feeds for fresh LLC detection.</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p>Umbra visual brief · local static documentation</p>
+        <p>CIS-first, resumable, deliberately conservative</p>
+      </footer>
+    </main>
+  </body>
+</html>

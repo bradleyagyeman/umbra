@@ -1,0 +1,20 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Debug artifacts
+cis_debug.html
+docs/visual/CLAUDE_REFRESH_TASK.md
+
+# Output data
+data/
+
+# OS metadata
+.DS_Store

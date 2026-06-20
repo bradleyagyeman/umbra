@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "umbra"
+dynamic = ["version"]
+description = "Detect newly formed Virginia LLCs before the scammers reach them."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "playwright>=1.58.0",
+    "pyfiglet>=1.0.4",
+]
+
+[project.scripts]
+umbra = "umbra:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+    "ruff>=0.15.11",
+]
+
+[tool.hatch.version]
+path = "umbra.py"
+
+[tool.hatch.build.targets.wheel]
+only-include = [
+    "batch_runner.py",
+    "cis_client.py",
+    "interactive.py",
+    "ledger.py",
+    "main.py",
+    "output.py",
+    "umbra.py",
+]
