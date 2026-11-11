@@ -18,3 +18,4 @@ data/
 
 # OS metadata
 .DS_Store
+/PROJECT_STATE.md
